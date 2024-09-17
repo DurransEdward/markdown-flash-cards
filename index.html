@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Q&A App</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <div id="card">
+        <h1 id="header">Question 1</h1>
+        <div id="text"></div>
+    </div>
+
+    <button id="button-1">Reveal Answer</button>
+    <button id="mark-as-learned">Mark as Learned</button>
+
+    <div id="file-input-container">
+        <input type="text" id="file-input" placeholder="Path to questions file">
+        <button id="load-questions-button">Load Questions</button>
+    </div>
+    
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>
