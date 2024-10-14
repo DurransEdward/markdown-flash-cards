@@ -13,24 +13,35 @@ async function loadQuestionsFromInput() {
 
     if (!pathToQuestionsFile) {
         alert("Please enter a file name.")
-        return
+        throw new Error("Please enter a file name.")
     }
+
+    let text = ''
 
     try {
         const response = await fetch(`http://localhost:3000/${pathToQuestionsFile}`)
-        const text = await response.text()
+        text = await response.text()
+    } catch (error) {
+        alert(`Failed to load questions. Check the file name and the file content.`)
+        throw error
+    }
     
-        const entries = text.split("######################################## NEW QUESTION ########################################").map(entry => entry.trim()).filter(entry => entry)
-        
-        
-        questions = entries.map((entry, index) => {
+    const entries = text.split("######################################## NEW QUESTION ########################################").map(entry => entry.trim()).filter(entry => entry)
+
+    if (entries.length === 0) {
+        alert("No questions found in the file.")
+        throw new Error("No questions found in the file.")
+    }
+
+    questions = entries.map((entry, index) => {
+        try {
             const questionMatch = entry.match(/__QUESTION__:\s*([\s\S]*?)\s*__ANSWER__:/)
             const answerMatch = entry.match(/__ANSWER__:\s*([\s\S]*?)\s*__LEARNED__:/)
             const learnedMatch = entry.match(/__LEARNED__:\s*(true|false)/)
 
             if (!questionMatch || !answerMatch || !learnedMatch) {
-                console.error("Failed to parse entry:", entry)
-                return null
+                alert(`Either __QUESTION__, __ANSWER__ or __LEARNED__ left undefined on question with index: ${index}`)
+                throw new Error(`Either __QUESTION__, __ANSWER__ or __LEARNED__ left undefined on question with index: ${index}`)
             }
 
             const question = questionMatch[1].trim()
@@ -38,17 +49,27 @@ async function loadQuestionsFromInput() {
             const learned = learnedMatch[1].trim() === 'true'
 
             return { question, answer, learned, questionIndexInFile: index }
-        })
-    
-        questions = questions.filter(question => !question.learned)
-        questions.sort(() => Math.random() - 0.5)
+        } catch (error) {
+            alert("Failed to parse entry:", entry)
+            throw error
+        }
+        
+    })
 
-        document.getElementById('header').style.visibility = 'visible'
-        document.getElementById('text').style.visibility = 'visible'
-        document.getElementById('button-1').style.visibility = 'visible'
-    } catch (error) {
-        console.error('Failed to load questions:', error)
+    questions = questions.filter(question => !question.learned)
+
+    if (questions.length === 0) {
+        alert("All questions have been learned.")
+        throw new Error("All questions have been learned.")
     }
+
+    questions.sort(() => Math.random() - 0.5)
+
+    document.getElementById('header').style.visibility = 'visible'
+    document.getElementById('text').style.visibility = 'visible'
+    document.getElementById('button-1').style.visibility = 'visible'
+    document.getElementById('answer-input').style.visibility = 'visible'
+    
 }
 
 async function clickButton() {
@@ -85,6 +106,8 @@ async function askNextQuestion() {
     document.getElementById('mark-as-learned').style.visibility = 'hidden'
 
     currentButtonText = 'Reveal Answer'
+
+    document.getElementById('answer-input').value = ''
 }
 
 async function revealAnswer() {
@@ -108,6 +131,9 @@ function finishedQuiz() {
     document.getElementById('button-1').textContent = 'Restart Quiz'
     document.getElementById('button-1').style.visibility = 'visible'
 
+    document.getElementById('answer-input').value = ''
+
+    document.getElementById('answer-input').style.visibility = 'hidden'
     document.getElementById('mark-as-learned').style.visibility = 'hidden'
 
     currentButtonText = 'Restart Quiz'

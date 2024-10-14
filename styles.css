@@ -7,25 +7,35 @@ body {
 }
 
 #card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* This pushes elements apart, moving the textarea to the bottom */
     margin-top: 10px;
     width: 50vw;
     height: 78vh;
     background-color: white;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
 #header {
     text-align: center;
-    visibility: hidden;
-
 }
 
 #text {
     margin-top: 10px;
+    height: 45%;
+}
+
+#answer-input {
+    width: calc(100% - 7px);
+    height: 50%;
+    font-size: 18px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
     visibility: hidden;
+    margin-top: 10px;
 }
 
 #button-1 {
@@ -64,4 +74,9 @@ body {
 
 #file-input-container {
     margin-top: 10px;
+}
+
+#file-not-found {
+    visibility: hidden;
+    color: red;
 }
