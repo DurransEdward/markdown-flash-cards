@@ -94,7 +94,7 @@ async function askNextQuestion() {
         return
     }
 
-    document.getElementById('header').textContent = "Question " + (currentQuestionIndex + 1)
+    document.getElementById('header').textContent = "Question " + (currentQuestionIndex + 1) + " / " + questions.length
 
     const displayQuestion = marked.parse(questions[currentQuestionIndex].question)
     
@@ -111,7 +111,7 @@ async function askNextQuestion() {
 }
 
 async function revealAnswer() {
-    document.getElementById('header').textContent = "Answer " + (currentQuestionIndex + 1)
+    document.getElementById('header').textContent = "Answer " + (currentQuestionIndex + 1) + " / " + questions.length
 
     const displayAnswer = marked.parse(questions[currentQuestionIndex].answer)
     document.getElementById('text').innerHTML = displayAnswer

@@ -2,7 +2,7 @@
 
 This is a simple web app that allows you to create flash cards which include LaTeX equations and code snippets.
 
-## Pull, Build, and Run
+## Pull, Build, and Run
 
 1. Pull this repository
 
