@@ -40,9 +40,14 @@ async function loadQuestionsFromInput() {
 
     try {
         const response = await fetch(`http://localhost:3000/${pathToQuestionsFile}`)
+
+        if (!response.ok) {
+            throw new Error(`Could not load "${pathToQuestionsFile}" (HTTP ${response.status}). Check the file name; the file must be inside the flash cards folder.`)
+        }
+
         text = await response.text()
     } catch (error) {
-        alert(`Failed to load questions. Check the file name and the file content.`)
+        alert(`Failed to load questions. ${error.message}`)
         throw error
     }
 
