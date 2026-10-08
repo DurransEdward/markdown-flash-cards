@@ -1,82 +1,88 @@
 body {
-    font-family: Arial;
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(232, 232, 232);
-    align-items: center;
+  font-family: Arial;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(232, 232, 232);
+  align-items: center;
 }
 
 #card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* This pushes elements apart, moving the textarea to the bottom */
-    margin-top: 10px;
-    width: 50vw;
-    height: 78vh;
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  width: min(900px, 92vw);
+  height: 78vh;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 #header {
-    text-align: center;
+  text-align: center;
+  margin: 0;
 }
 
 #text {
-    margin-top: 10px;
-    height: 45%;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 #answer-input {
-    width: calc(100% - 7px);
-    height: 50%;
-    font-size: 18px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    visibility: hidden;
-    margin-top: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 180px;
+  height: 35%;
+  flex: 0 0 35%;
+  font-size: 18px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  visibility: hidden;
+  resize: vertical;
 }
 
 #button-1 {
-    margin-top: 10px;
-    width: 200px;
-    height: 50px;
-    background-color: #007bff;
-    color: white;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    visibility: hidden;
+  margin-top: 10px;
+  width: 200px;
+  height: 50px;
+  background-color: #007bff;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  visibility: hidden;
 }
 
 #button-1:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 #mark-as-learned {
-    margin-top: 10px;
-    width: 200px;
-    height: 50px;
-    background-color: #02d834e9;
-    color: white;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    visibility: hidden;
+  margin-top: 10px;
+  width: 200px;
+  height: 50px;
+  background-color: #02d834e9;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  visibility: hidden;
 }
 
 #mark-as-learned:hover {
-    background-color: #05b72e;
+  background-color: #05b72e;
 }
 
 #file-input-container {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 #file-not-found {
-    visibility: hidden;
-    color: red;
+  visibility: hidden;
+  color: red;
 }

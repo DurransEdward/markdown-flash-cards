@@ -11,10 +11,11 @@ app.post('/mark-as-learned', async (req, res) => {
 
     try {
         const data = await fs.readFile(pathToQuestionsFile, 'utf8')
-        
+
         let questions = data.trim().split("######################################## NEW QUESTION ########################################").map(entry => entry.trim()).filter(entry => entry)
 
-        questions[questionIndex] = questions[questionIndex].replace('__LEARNED__: false', '__LEARNED__: true')
+        questions[questionIndex] = questions[questionIndex].replace('**LEVEL**: 0
+__DATE__: NA', '__LEARNED__: true')
 
         await fs.writeFile(pathToQuestionsFile, "")
         for (let i = 0; i < questions.length; i++) {

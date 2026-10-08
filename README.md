@@ -33,19 +33,21 @@ npm run start
 ```markdown
 ######################################## NEW QUESTION ########################################
 
-__QUESTION__: Your first question.
+**QUESTION**: Your first question.
 
-__ANSWER__: Your first answer.
+**ANSWER**: Your first answer.
 
-__LEARNED__: false
+**LEVEL**: 0
+**DATE**: NA
 
 ######################################## NEW QUESTION ########################################
 
-__QUESTION__: Your second question.
+**QUESTION**: Your second question.
 
-__ANSWER__: Your second answer.
+**ANSWER**: Your second answer.
 
-__LEARNED__: false
+**LEVEL**: 0
+**DATE**: NA
 ```
 
 ## Disclaimer
@@ -56,4 +58,5 @@ Pull requests are welcome.
 
 ## TO DO
 
-- Add a button to reset all questions in a deck to `__LEARNED__: false`.
+- Add a button to reset all questions in a deck to `**LEVEL**: 0
+__DATE__: NA`.
