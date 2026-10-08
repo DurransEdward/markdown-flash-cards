@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "parcel build index.html",
-    "start-front": "parcel index.html",
+    "start-front": "parcel index.html --open",
     "start-back": "node server.mjs",
     "start": "npm-run-all --parallel start-front start-back",
     "test": "node --test"

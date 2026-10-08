@@ -16,6 +16,18 @@ function showButtons(...visibleIds) {
     }
 }
 
+function showLevel(level) {
+    const badge = document.getElementById('level-badge')
+    badge.textContent = "Level " + level
+    badge.hidden = false
+}
+
+function showQuestionsRemaining() {
+    const counter = document.getElementById('questions-remaining')
+    counter.textContent = "Questions remaining: " + (questions.length - currentQuestionIndex)
+    counter.hidden = false
+}
+
 async function loadQuestionsFromInput() {
     pathToQuestionsFile = document.getElementById('file-input').value
 
@@ -55,8 +67,6 @@ async function loadQuestionsFromInput() {
         throw new Error("No questions are due today.")
     }
 
-    questions.sort(() => Math.random() - 0.5)
-
     document.getElementById('header').style.visibility = 'visible'
     document.getElementById('text').style.visibility = 'visible'
     document.getElementById('answer-input').style.visibility = 'visible'
@@ -70,7 +80,10 @@ async function askNextQuestion() {
         return
     }
 
-    document.getElementById('header').textContent = "Question " + (currentQuestionIndex + 1) + " / " + questions.length
+    document.getElementById('header').textContent = "Question"
+
+    showLevel(questions[currentQuestionIndex].level)
+    showQuestionsRemaining()
 
     const displayQuestion = marked.parse(questions[currentQuestionIndex].question)
 
@@ -82,7 +95,7 @@ async function askNextQuestion() {
 }
 
 async function revealAnswer() {
-    document.getElementById('header').textContent = "Answer " + (currentQuestionIndex + 1) + " / " + questions.length
+    document.getElementById('header').textContent = "Answer"
 
     const displayAnswer = marked.parse(questions[currentQuestionIndex].answer)
     document.getElementById('text').innerHTML = displayAnswer
@@ -92,6 +105,8 @@ async function revealAnswer() {
 
 function finishedQuiz() {
     document.getElementById('header').textContent = "Finished Quiz!"
+    document.getElementById('level-badge').hidden = true
+    document.getElementById('questions-remaining').hidden = true
     document.getElementById('text').style.visibility = 'hidden'
 
     document.getElementById('answer-input').value = ''

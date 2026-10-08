@@ -4,25 +4,23 @@ This is a simple web app that allows you to create flash cards which include LaT
 
 ## Pull, Build, and Run
 
-1. Pull this repository
-
-2. Run:
+1. Pull this repository and install the dependencies:
 
 ```bash
-npm run build
+npm install
 ```
 
-3. Run:
+2. Run:
 
 ```bash
 npm run start
 ```
 
-4. Go to a browser and type `http://localhost:1234` into the address bar.
+This builds the app, starts the backend server (port 3000) and the front-end server (port 1234), and opens `http://localhost:1234` in your default browser. Press `Ctrl+C` in the terminal to stop everything.
 
-5. Type `example-questions.md` into the input field and click the "Load Questions" button.
+3. Type `example-questions.md` into the input field and click the "Load Questions" button.
 
-6. Click through the flash cards. Only cards that are due today are shown. Before revealing an answer you can click `Reveal Answer` or `Skip Question` (which leaves the card untouched). After revealing the answer, mark how you did:
+4. Click through the flash cards. Only cards that are due today are shown. Before revealing an answer you can click `Reveal Answer` or `Skip Question` (which leaves the card untouched). After revealing the answer, mark how you did:
 
    - `Correct` moves the card up a level and records today's date.
    - `Almost Correct` leaves the card's level and date unchanged (for small slips, like a typo).
