@@ -43,7 +43,7 @@ body {
 
 #questions-remaining {
   width: fit-content;
-  margin-bottom: 8px;
+  margin: 0 auto 8px;
 }
 
 #header {

@@ -2,15 +2,24 @@
 
 This is a simple web app that allows you to create flash cards which include LaTeX equations and code snippets.
 
-## Pull, Build, and Run
+## Clone, Install, and Run
 
-1. Pull this repository and install the dependencies:
+You need [Node.js](https://nodejs.org/) (which includes `npm`) installed.
+
+1. Clone this repository, then `cd` into it:
+
+```bash
+git clone https://github.com/DurransEdward/markdown-flash-cards.git
+cd markdown-flash-cards
+```
+
+2. Install dependencies:
 
 ```bash
 npm install
 ```
 
-2. Run:
+3. Start the app:
 
 ```bash
 npm run start
@@ -18,9 +27,9 @@ npm run start
 
 This builds the app, starts the backend server (port 3000) and the front-end server (port 1234), and opens `http://localhost:1234` in your default browser. Press `Ctrl+C` in the terminal to stop everything.
 
-3. Type `example-questions.md` into the input field and click the "Load Questions" button.
+4. Type `./questions/example-questions.md` into the input field and click the "Load Questions" button.
 
-4. Click through the flash cards. Only cards that are due today are shown. Before revealing an answer you can click `Reveal Answer` or `Skip Question` (which leaves the card untouched). After revealing the answer, mark how you did:
+5. Click through the flash cards. Only cards that are due today are shown. Before revealing an answer you can click `Reveal Answer` or `Skip Question` (which leaves the card untouched). After revealing the answer, mark how you did:
 
    - `Correct` moves the card up a level and records today's date.
    - `Almost Correct` leaves the card's level and date unchanged (for small slips, like a typo).
@@ -43,7 +52,7 @@ Days are calendar days in your local time, so a card answered correctly yesterda
 
 ## Make Your Own Deck of Flash Cards
 
-1. Create a new markdown file in the base directory of this repository, e.g. `my-questions.md`.
+1. Create a new markdown file in the base directory of this repository, e.g. `questions/my-questions.md`.
 
 2. Add questions and answers to the markdown file in the following format:
 
