@@ -44,38 +44,62 @@ body {
   resize: vertical;
 }
 
-#button-1 {
+#buttons {
+  display: flex;
+  gap: 10px;
   margin-top: 10px;
+}
+
+#buttons button {
   width: 200px;
   height: 50px;
-  background-color: #007bff;
   color: white;
   font-size: 18px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  visibility: hidden;
 }
 
-#button-1:hover {
+#reveal-button,
+#restart-button {
+  background-color: #007bff;
+}
+
+#reveal-button:hover,
+#restart-button:hover {
   background-color: #0056b3;
 }
 
-#mark-as-learned {
-  margin-top: 10px;
-  width: 200px;
-  height: 50px;
-  background-color: #02d834e9;
-  color: white;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  visibility: hidden;
+#skip-button {
+  background-color: #6c757d;
 }
 
-#mark-as-learned:hover {
+#skip-button:hover {
+  background-color: #565e64;
+}
+
+#correct-button {
+  background-color: #02d834e9;
+}
+
+#correct-button:hover {
   background-color: #05b72e;
+}
+
+#almost-correct-button {
+  background-color: #e0a800;
+}
+
+#almost-correct-button:hover {
+  background-color: #b78900;
+}
+
+#incorrect-button {
+  background-color: #dc3545;
+}
+
+#incorrect-button:hover {
+  background-color: #b02a37;
 }
 
 #file-input-container {

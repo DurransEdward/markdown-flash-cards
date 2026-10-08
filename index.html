@@ -16,8 +16,14 @@
         <textarea id="answer-input" placeholder="Write your answer here..."></textarea>
     </div>
 
-    <button id="button-1">Reveal Answer</button>
-    <button id="mark-as-learned">Mark as Learned</button>
+    <div id="buttons">
+        <button id="reveal-button" hidden>Reveal Answer</button>
+        <button id="skip-button" hidden>Skip Question</button>
+        <button id="correct-button" hidden>Correct</button>
+        <button id="almost-correct-button" hidden>Almost Correct</button>
+        <button id="incorrect-button" hidden>Incorrect</button>
+        <button id="restart-button" hidden>Restart Quiz</button>
+    </div>
 
     <div id="file-input-container">
         <input type="text" id="file-input" placeholder="Path to questions file">

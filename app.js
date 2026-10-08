@@ -1,12 +1,20 @@
 import { marked } from 'marked'
 import markedKatex from 'marked-katex-extension'
+import { parseCards, isDue } from './cards.mjs'
 
 marked.use(markedKatex())
 
+const BUTTON_IDS = ['reveal-button', 'skip-button', 'correct-button', 'almost-correct-button', 'incorrect-button', 'restart-button']
+
 let questions = []
 let currentQuestionIndex = -1
-let currentButtonText = 'Reveal Answer'
 let pathToQuestionsFile = ''
+
+function showButtons(...visibleIds) {
+    for (const id of BUTTON_IDS) {
+        document.getElementById(id).hidden = !visibleIds.includes(id)
+    }
+}
 
 async function loadQuestionsFromInput() {
     pathToQuestionsFile = document.getElementById('file-input').value
@@ -25,65 +33,33 @@ async function loadQuestionsFromInput() {
         alert(`Failed to load questions. Check the file name and the file content.`)
         throw error
     }
-    
-    const entries = text.split("######################################## NEW QUESTION ########################################").map(entry => entry.trim()).filter(entry => entry)
 
-    if (entries.length === 0) {
+    let allQuestions = []
+
+    try {
+        allQuestions = parseCards(text)
+    } catch (error) {
+        alert(error.message)
+        throw error
+    }
+
+    if (allQuestions.length === 0) {
         alert("No questions found in the file.")
         throw new Error("No questions found in the file.")
     }
 
-    questions = entries.map((entry, index) => {
-        try {
-            const questionMatch = entry.match(/__QUESTION__:\s*([\s\S]*?)\s*__ANSWER__:/)
-            const answerMatch = entry.match(/__ANSWER__:\s*([\s\S]*?)\s*__LEARNED__:/)
-            const learnedMatch = entry.match(/__LEARNED__:\s*(true|false)/)
-
-            if (!questionMatch || !answerMatch || !learnedMatch) {
-                alert(`Either __QUESTION__, __ANSWER__ or __LEARNED__ left undefined on question with index: ${index}`)
-                throw new Error(`Either __QUESTION__, __ANSWER__ or __LEARNED__ left undefined on question with index: ${index}`)
-            }
-
-            const question = questionMatch[1].trim()
-            const answer = answerMatch[1].trim()
-            const learned = learnedMatch[1].trim() === 'true'
-
-            return { question, answer, learned, questionIndexInFile: index }
-        } catch (error) {
-            alert("Failed to parse entry:", entry)
-            throw error
-        }
-        
-    })
-
-    questions = questions.filter(question => !question.learned)
+    questions = allQuestions.filter(question => isDue(question))
 
     if (questions.length === 0) {
-        alert("All questions have been learned.")
-        throw new Error("All questions have been learned.")
+        alert("No questions are due today.")
+        throw new Error("No questions are due today.")
     }
 
     questions.sort(() => Math.random() - 0.5)
 
     document.getElementById('header').style.visibility = 'visible'
     document.getElementById('text').style.visibility = 'visible'
-    document.getElementById('button-1').style.visibility = 'visible'
     document.getElementById('answer-input').style.visibility = 'visible'
-    
-}
-
-async function clickButton() {
-    switch (currentButtonText) {
-        case 'Reveal Answer':
-            await revealAnswer()
-            break
-        case 'Next Question':
-            await askNextQuestion()
-            break
-        case 'Restart Quiz':
-            await startQuiz()
-            break
-    }
 }
 
 async function askNextQuestion() {
@@ -97,15 +73,10 @@ async function askNextQuestion() {
     document.getElementById('header').textContent = "Question " + (currentQuestionIndex + 1) + " / " + questions.length
 
     const displayQuestion = marked.parse(questions[currentQuestionIndex].question)
-    
+
     document.getElementById('text').innerHTML = displayQuestion
 
-    document.getElementById('button-1').textContent = 'Reveal Answer'
-    document.getElementById('button-1').style.visibility = 'visible'
-
-    document.getElementById('mark-as-learned').style.visibility = 'hidden'
-
-    currentButtonText = 'Reveal Answer'
+    showButtons('reveal-button', 'skip-button')
 
     document.getElementById('answer-input').value = ''
 }
@@ -116,45 +87,37 @@ async function revealAnswer() {
     const displayAnswer = marked.parse(questions[currentQuestionIndex].answer)
     document.getElementById('text').innerHTML = displayAnswer
 
-    document.getElementById('button-1').textContent = 'Next Question'
-    document.getElementById('button-1').style.visibility = 'visible'
-
-    document.getElementById('mark-as-learned').style.visibility = 'visible'
-
-    currentButtonText = 'Next Question'
+    showButtons('correct-button', 'almost-correct-button', 'incorrect-button')
 }
 
 function finishedQuiz() {
     document.getElementById('header').textContent = "Finished Quiz!"
     document.getElementById('text').style.visibility = 'hidden'
 
-    document.getElementById('button-1').textContent = 'Restart Quiz'
-    document.getElementById('button-1').style.visibility = 'visible'
-
     document.getElementById('answer-input').value = ''
-
     document.getElementById('answer-input').style.visibility = 'hidden'
-    document.getElementById('mark-as-learned').style.visibility = 'hidden'
 
-    currentButtonText = 'Restart Quiz'
+    showButtons('restart-button')
 }
 
-async function markAsLearned() {
-    const response = await fetch('http://localhost:3000/mark-as-learned', {
+async function recordAnswer(correct) {
+    const response = await fetch('http://localhost:3000/record-answer', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             pathToQuestionsFile,
-            questionIndex: questions[currentQuestionIndex].questionIndexInFile
+            questionIndex: questions[currentQuestionIndex].questionIndexInFile,
+            correct
         }),
     })
 
     if (response.ok) {
-        await askNextQuestion()    
+        await askNextQuestion()
     } else {
-        console.error('Failed to mark as learned')
+        alert('Failed to save your answer. Is the server running?')
+        console.error('Failed to record answer')
     }
 }
 
@@ -165,8 +128,12 @@ async function startQuiz() {
 }
 
 function setup() {
-    document.getElementById('button-1').addEventListener('click', clickButton)
-    document.getElementById('mark-as-learned').addEventListener('click', markAsLearned)
+    document.getElementById('reveal-button').addEventListener('click', revealAnswer)
+    document.getElementById('skip-button').addEventListener('click', askNextQuestion)
+    document.getElementById('correct-button').addEventListener('click', () => recordAnswer(true))
+    document.getElementById('almost-correct-button').addEventListener('click', askNextQuestion)
+    document.getElementById('incorrect-button').addEventListener('click', () => recordAnswer(false))
+    document.getElementById('restart-button').addEventListener('click', startQuiz)
     document.getElementById('load-questions-button').addEventListener('click', startQuiz)
 }
 
