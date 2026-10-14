@@ -6,6 +6,7 @@
 
 $$a^2 + b^2 = c^2$$
 
+**IMPORTANCE**: LOW
 **LEVEL**: 0
 **DATE**: NA
 
@@ -15,6 +16,7 @@ $$a^2 + b^2 = c^2$$
 
 **ANSWER**: $$F = \frac{G m_1 m_2}{r^2}$$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -24,6 +26,7 @@ $$a^2 + b^2 = c^2$$
 
 **ANSWER**: $$\text{exp}(i \pi) + 1 = 0$$
 
+**IMPORTANCE**: HIGH
 **LEVEL**: 0
 **DATE**: NA
 
@@ -37,6 +40,7 @@ $$a^2 + b^2 = c^2$$
 print("Hello World!")
 ```
 
+**IMPORTANCE**: LOW
 **LEVEL**: 0
 **DATE**: NA
 
@@ -55,6 +59,7 @@ my_list.reverse()
 print(my_list) # [5, 4, 3, 2, 1]
 ```
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -69,6 +74,7 @@ even_numbers = [x for x in range(1, 21) if x % 2 == 0]
 print(even_numbers) # [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
 ```
 
+**IMPORTANCE**: HIGH
 **LEVEL**: 0
 **DATE**: NA
 

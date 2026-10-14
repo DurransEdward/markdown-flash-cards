@@ -12,6 +12,7 @@
 2. $\lambda x.\ \lambda y.\ x^2 + y^2$
 3. $\lambda x.\ m * x + c$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 1
 **DATE**: 2026-10-14
 
@@ -27,6 +28,7 @@
 1. $6^2 = 36$
 2. $(\lambda x.\ \lambda y.\ x^3 + y^4)\ 3\ 4 = 3^3 + 4^4 = 283$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 2
 **DATE**: 2026-10-14
 
@@ -52,6 +54,7 @@ $\to 5 + 3$
 
 $\to 8$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 2
 **DATE**: 2026-10-14
 
@@ -71,6 +74,7 @@ Explain your answers.
 
 $(\lambda y.\ 5)$ is the function which takes input $y$ and returns $5$ regardless of the value of $y$. Note that this is not the same as the value $5$ itself. You need to call the function to get the value $5$.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 2
 **DATE**: 2026-10-14
 
@@ -96,6 +100,7 @@ $\to 8 * 2$
 
 $\to 16$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 2
 **DATE**: 2026-10-14
 
@@ -109,6 +114,7 @@ $\lambda x.\ \lambda y.\ x^2 + y^2$
 
 $\lambda xy.\ x^2 + y^2$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 2
 **DATE**: 2026-10-14
 
@@ -118,6 +124,7 @@ $\lambda xy.\ x^2 + y^2$
 
 **ANSWER**: An expression (or term) is any valid sequence of symbols constructed according to the formal grammar rules of the system which denotes an object or a value. For example, considering basic arithmetic, the following is a valid expression: $5 * (5 + 4) - 2$ which happens to be equivalent to the expression $43$. However, note that this $5 * (5 + 4) - 2 = 43$ is NOT an expression, it is an equation (it's also a formula, a statement, or a proposition).
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 1
 **DATE**: 2026-10-14
 
@@ -133,6 +140,7 @@ $\lambda xy.\ x^2 + y^2$
 
 Nothing else is a λ-term.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -142,6 +150,7 @@ Nothing else is a λ-term.
 
 **ANSWER**: The body of the abstraction.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 1
 **DATE**: 2026-10-14
 
@@ -151,6 +160,7 @@ Nothing else is a λ-term.
 
 **ANSWER**: Pure lambda calculus has only three kinds of λ-terms: variables, abstractions and applications. Extended (or applied) lambda calculus adds constants such as $5$, $+$, $*$ and $TRUE$, as a fourth kind of λ-term, together with extra reduction rules (called δ-rules) saying how the constants compute, e.g. $5 + 3 \to 8$. Those δ-steps are not β-reductions.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 1
 **DATE**: 2026-10-14
 
@@ -170,6 +180,7 @@ Nothing else is a λ-term.
 3. $V$ is the set of all variables.
 4. $x, y, z, \dots$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 1
 **DATE**: 2026-10-14
 
@@ -187,6 +198,7 @@ Nothing else is a λ-term.
 2. A variable in the body of an abstraction that binds that variable. For example, the second $x$ in the λ-term $\lambda x.\ x + 1$.
 3. A variable that isn't binding and isn't inside any abstraction that binds it. E.g. the $y$ in $\lambda x.\ x\ y$.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 1
 **DATE**: 2026-10-14
 
@@ -222,6 +234,7 @@ Nothing else is a λ-term.
 
 3. $\Lambda^{0}$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 1
 **DATE**: 2026-10-14
 
@@ -241,6 +254,7 @@ $\to y\ N\ (\lambda x.\ x)$
 
 Note that the first time that $x$ appears in $y\ x\ (\lambda x.\ x) [x := N]$ is a free variable whereas the second time it is a binding variable and third time it is bound variable. Substitution only applies to free variables.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 2
 **DATE**: 2026-10-14
 
@@ -263,6 +277,7 @@ Note that the first time that $x$ appears in $y\ x\ (\lambda x.\ x) [x := N]$ is
 
 4. No. Substitution is one part of beta reduction. For example, consider the λ-term $x\ y\ x$ and the substitution $[x := N]$. Applying the substitution gives $N\ y\ N$. Now consider the redex $(\lambda x.\ x\ y\ x)\ N$. To perform beta reduction, we first remove the $\lambda x$, then apply the substitution $[x := N]$ to the body $x\ y\ x$, i.e. $(x\ y\ x)[x := N] = N\ y\ N$.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 1
 **DATE**: 2026-10-14
 
@@ -286,6 +301,7 @@ $\to 7$
 
 The intermediate result $\lambda y.\ 3 + y$ is itself a useful function (one that adds 3). Supplying only some of the arguments like this is called **partial application**.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 1
 **DATE**: 2026-10-14
 
@@ -318,6 +334,7 @@ The intermediate result $\lambda y.\ 3 + y$ is itself a useful function (one tha
    c. $\lambda x.\ x =_{\alpha} \lambda y.\ y$
    d. $(\lambda x.\ x)\ z =\beta z$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 1
 **DATE**: 2026-10-14
 
@@ -349,14 +366,15 @@ The intermediate result $\lambda y.\ 3 + y$ is itself a useful function (one tha
 9. Valid
 10. Invalid
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
 ######################################## NEW QUESTION ########################################
 
-**QUESTION**: Consider a λ-abstraction $\lambda x.\ M$. What does it mean to "rename" $x$ in this abstraction to another variable $y$? What notation is used to indicate this renamed λ-abstraction?
+**QUESTION**: Consider a λ-abstraction $\lambda x.\ M$. What does it mean to "rename" $x$ in this abstraction to another variable $y$? What notation is used to indicate this renamed λ-abstraction? What conditions must be met before this renaming can happen?
 
-**ANSWER**: $M^{x \to y}$ denotes the renamed λ-abstraction. To obtain $M^{x \to y}$ from $M$, replace every free occurrence of $x$ in $M$ by $y$ provided that:
+**ANSWER**: $M^{x \to y}$ denotes the renamed λ-abstraction of $M$ with $x$ being renamed $y$. To obtain $M^{x \to y}$ from $M$, replace every free occurrence of $x$ in $M$ by $y$ provided that:
 
 1. $y \notin FV(M)$ (where $FV(M)$ denotes the set of free variables in $M$)
 2. $y$ is not already a binding variable in $M$.
@@ -367,6 +385,7 @@ $\lambda x.\ M =_{\alpha} \lambda y.\ M^{x \to y}$
 
 And say that $x$ has been renamed to $y$.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -378,10 +397,14 @@ And say that $x$ has been renamed to $y$.
 
 1. **Renaming**: $\lambda x.\ M =_{\alpha} \lambda y.\ M^{x \to y}$
 2. **Compatibility**: If $M =_{\alpha} N$, then $M\ L =_{\alpha} N\ L$, $L\ M =_{\alpha} L\ N$ and, for arbitrary $z$, $\lambda z.\ M =_{\alpha} \lambda z.\ N$.
+
 3.a. **Reflexivity**: $M =_{\alpha} M$
+
 3.b. **Symmetry**: If $M =_{\alpha} N$, then $N =_{\alpha} M$
+
 3.c. **Transitivity**: If $L =_{\alpha} M$ and $M =_{\alpha} N$, then $L =_{\alpha} N$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -397,6 +420,7 @@ To avoid capture, first rename the bound variable to a fresh name ($\alpha$-conv
 
 This is the correct result: the $y$ stays free. Substitution that renames bound variables in this way is called capture-avoiding substitution, and it's what β-reduction always uses.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -413,6 +437,7 @@ This is the correct result: the $y$ stays free. Substitution that renames bound 
 
 GO ONTO THE NEXT QUESTION FOR PRACTICAL EXAMPLES.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -461,6 +486,7 @@ $\equiv (\lambda x.\ (\lambda u.\ y\ y\ x))$
 
 $\equiv \lambda xu.\ y\ y\ x$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -470,6 +496,7 @@ $\equiv \lambda xu.\ y\ y\ x$
 
 **ANSWER**: No. Consider $x[x := y][y := x] \equiv y[y := x] \equiv x$. However, $x[y := x][x := y] \equiv x[x := y] \equiv y$.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -479,6 +506,7 @@ $\equiv \lambda xu.\ y\ y\ x$
 
 **ANSWER**: $M[x := N][y := L] \equiv M[y := L][x := N[y := L]]$ if $x \not\equiv y$ and $x \notin FV(L)$.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -488,6 +516,7 @@ $\equiv \lambda xu.\ y\ y\ x$
 
 **ANSWER**: A set must contain distinct elements whereas a multiset can contain the same element multiple times. For both a set and a multiset the order of elements does not matter.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -511,6 +540,7 @@ $\equiv \lambda xu.\ y\ y\ x$
 - $M \in Sub(M)$ for all $M \in \Lambda$.
 - If $L \in Sub(M)$ and $M \in Sub(N)$, then $L \in Sub(N)$.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -575,6 +605,7 @@ Sub((λx. λy. x y) (λz. z) w) =
 
 (10 elements)
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -584,6 +615,7 @@ Sub((λx. λy. x y) (λz. z) w) =
 
 **ANSWER**: $L$ is a "proper subterm" of $M$ if $L \in Sub(M)$, but $L \not\equiv M$.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -593,6 +625,7 @@ Sub((λx. λy. x y) (λz. z) w) =
 
 **ANSWER**: In all λ-terms, all binding variables are chosen to be distinct from each other and from all free variables in the term.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -604,6 +637,7 @@ Sub((λx. λy. x y) (λz. z) w) =
 
 $(\lambda xy.\ x\ z)(\lambda xz.\ z) \equiv (\lambda xy.\ x\ z)(\lambda uv.\ v)$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -620,6 +654,7 @@ $(\lambda xy.\ x\ z)(\lambda xz.\ z) \equiv (\lambda xy.\ x\ z)(\lambda uv.\ v)$
 - $L\ M \to \beta L\ N$
 - $\lambda x.\ M \to \beta \lambda x.\ N$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -639,6 +674,7 @@ I.e. There exists a chain of one-step β-reductions starting with $M$ and ending
 
 $M \equiv M_0 \to_{\beta}\ M_1 \to_{\beta} \dots \to_{\beta}\ M_{n-1} \to_{\beta}\ M_n \equiv N$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -648,6 +684,7 @@ $M \equiv M_0 \to_{\beta}\ M_1 \to_{\beta} \dots \to_{\beta}\ M_{n-1} \to_{\beta
 
 **ANSWER**: Yes. β-reduction is transitive. This means that for any λ-terms $L$, $M$ and $N$, if $L \twoheadrightarrow_{\beta}\ M$ and $M \twoheadrightarrow_{\beta}\ N$ then it follows that $M \twoheadrightarrow_{\beta}\ N$.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -680,6 +717,7 @@ $\to N$
 
 4. $\lambda b.\ \lambda x.\ \lambda y.\ b\ x\ y$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -695,6 +733,7 @@ $\to N$
 1. $b\ FALSE\ TRUE$
 2. $\lambda b.\ b\ FALSE\ TRUE$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -714,6 +753,7 @@ First consider the case when $p$ is $TRUE$. Whether $p\ AND\ q$ is $TRUE$ now de
 
 Now consider the case when $p$ is $FALSE$. Here $p\ AND\ q$ is definitely $FALSE$ regardless of the value of $q$.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 1
 **DATE**: 2026-10-06
 
@@ -733,6 +773,7 @@ First consider the case when $p$ is $TRUE$. $p\ OR\ q$ should immediately evalua
 
 Next consider the case when $p$ is $FALSE$. Here, $p\ OR\ q$ is now totally equivalent to the value of $q$.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 1
 **DATE**: 2026-10-06
 
@@ -767,6 +808,7 @@ $= (\lambda x.\ \lambda y.\ x)\ A\ B$
 $\to (\lambda y.\ A)\ B$
 $\to A$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -776,6 +818,7 @@ $\to A$
 
 **ANSWER**: When one instantiates a $PAIR$, one typically knows the values of the data but doesn't yet know which element they are going to access.
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 1
 **DATE**: 2026-10-06
 
@@ -791,6 +834,7 @@ $\to A$
 1. $\lambda x.\ \lambda y.\ y$
 2. This is identical to $FALSE$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -818,6 +862,7 @@ Using tagged Church pairs to represent dynamically-sized singly linked lists:
 6. Calling $HEAD\ NIL$ or $TAIL\ NIL$ is undefined behaviour.
 7. 1st: $HEAD\ L$, 2nd: $HEAD\ (TAIL\ L)$, 3rd: $HEAD\ (TAIL\ (TAIL\ L))$, 4th: $HEAD\ (TAIL\ (TAIL\ (TAIL\ L)))$, 5th: $HEAD\ (TAIL\ (TAIL\ (TAIL\ (TAIL\ L))))$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -833,6 +878,7 @@ $2 \equiv \lambda f.\ \lambda x.\ f\ (f\ x)$
 $3 \equiv \lambda f.\ \lambda x.\ f\ (f\ (f\ x))$
 $4 \equiv \lambda f.\ \lambda x.\ f\ (f\ (f\ (f\ x)))$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
@@ -853,6 +899,7 @@ $4 \equiv \lambda f.\ \lambda x.\ f\ (f\ (f\ (f\ x)))$
    $\to \lambda g.\ \lambda y.\ g\ (g\ (g\ y))$
    $\to 3$
 
+**IMPORTANCE**: MEDIUM
 **LEVEL**: 0
 **DATE**: NA
 
