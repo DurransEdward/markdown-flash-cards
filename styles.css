@@ -36,6 +36,10 @@ body {
   font-weight: bold;
 }
 
+#level-badge {
+  background: linear-gradient(to right, #a1aab4 var(--level-progress, 0%), #ced4da var(--level-progress, 0%));
+}
+
 #badges {
   position: absolute;
   top: 10px;

@@ -1,6 +1,6 @@
 import { marked } from 'marked'
 import markedKatex from 'marked-katex-extension'
-import { parseCards, isDue } from './cards.mjs'
+import { parseCards, isDue, MAX_LEVEL } from './cards.mjs'
 
 marked.use(markedKatex({ nonStandard: true }))
 
@@ -34,6 +34,7 @@ function showButtons(...visibleIds) {
 function showLevel(level) {
     const badge = document.getElementById('level-badge')
     badge.textContent = "Level: " + level
+    badge.style.setProperty('--level-progress', (level / MAX_LEVEL * 100) + '%')
     badge.hidden = false
 }
 
