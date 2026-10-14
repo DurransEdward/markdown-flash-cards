@@ -2,13 +2,28 @@ import { marked } from 'marked'
 import markedKatex from 'marked-katex-extension'
 import { parseCards, isDue } from './cards.mjs'
 
-marked.use(markedKatex())
+marked.use(markedKatex({ nonStandard: true }))
 
 const BUTTON_IDS = ['reveal-button', 'skip-button', 'correct-button', 'almost-correct-button', 'incorrect-button', 'restart-button']
 
 let questions = []
 let currentQuestionIndex = -1
-let pathToQuestionsFile = ''
+let questionsFileName = ''
+
+function escapeHtml(text) {
+    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
+// Renders markdown/KaTeX; on failure shows an explicit error plus the raw source instead of breaking the card.
+function renderMarkdown(source, part) {
+    try {
+        return marked.parse(source)
+    } catch (error) {
+        console.error(`Failed to render the ${part} of question ${currentQuestionIndex + 1}:`, error)
+        return `<div class="render-error"><strong>⚠ Rendering error in this ${part}:</strong> ${escapeHtml(error.message)}</div>` +
+            `<pre class="render-error-source">${escapeHtml(source)}</pre>`
+    }
+}
 
 function showButtons(...visibleIds) {
     for (const id of BUTTON_IDS) {
@@ -29,20 +44,25 @@ function showQuestionsRemaining() {
 }
 
 async function loadQuestionsFromInput() {
-    pathToQuestionsFile = document.getElementById('file-input').value
+    questionsFileName = document.getElementById('file-input').value.trim()
 
-    if (!pathToQuestionsFile) {
+    if (!questionsFileName) {
         alert("Please enter a file name.")
         throw new Error("Please enter a file name.")
+    }
+
+    if (questionsFileName === '.' || questionsFileName === '..' || /[\\/]/.test(questionsFileName)) {
+        alert("Please enter a file name, not a path.")
+        throw new Error("Please enter a file name, not a path.")
     }
 
     let text = ''
 
     try {
-        const response = await fetch(`http://localhost:3000/${pathToQuestionsFile}`)
+        const response = await fetch(`http://localhost:3000/questions/${encodeURIComponent(questionsFileName)}`)
 
         if (!response.ok) {
-            throw new Error(`Could not load "${pathToQuestionsFile}" (HTTP ${response.status}). Check the file name; the file must be inside the flash cards folder.`)
+            throw new Error(`Could not load "${questionsFileName}" (HTTP ${response.status}). Check that the file is inside the questions directory.`)
         }
 
         text = await response.text()
@@ -90,7 +110,7 @@ async function askNextQuestion() {
     showLevel(questions[currentQuestionIndex].level)
     showQuestionsRemaining()
 
-    const displayQuestion = marked.parse(questions[currentQuestionIndex].question)
+    const displayQuestion = renderMarkdown(questions[currentQuestionIndex].question, 'question')
 
     document.getElementById('text').innerHTML = displayQuestion
 
@@ -102,7 +122,7 @@ async function askNextQuestion() {
 async function revealAnswer() {
     document.getElementById('header').textContent = "Answer"
 
-    const displayAnswer = marked.parse(questions[currentQuestionIndex].answer)
+    const displayAnswer = renderMarkdown(questions[currentQuestionIndex].answer, 'answer')
     document.getElementById('text').innerHTML = displayAnswer
 
     showButtons('correct-button', 'almost-correct-button', 'incorrect-button')
@@ -127,7 +147,7 @@ async function recordAnswer(correct) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            pathToQuestionsFile,
+            questionsFileName,
             questionIndex: questions[currentQuestionIndex].questionIndexInFile,
             correct
         }),

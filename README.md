@@ -27,7 +27,7 @@ npm run start
 
 This builds the app, starts the backend server (port 3000) and the front-end server (port 1234), and opens `http://localhost:1234` in your default browser. Press `Ctrl+C` in the terminal to stop everything.
 
-4. Type `./questions/example-questions.md` into the input field and click the "Load Questions" button.
+4. Type `example_questions.md` into the input field and click the "Load Questions" button. Question files are loaded from the `questions` directory.
 
 5. Click through the flash cards. Only cards that are due today are shown. Before revealing an answer you can click `Reveal Answer` or `Skip Question` (which leaves the card untouched). After revealing the answer, mark how you did:
 
@@ -52,7 +52,7 @@ Days are calendar days in your local time, so a card answered correctly yesterda
 
 ## Make Your Own Deck of Flash Cards
 
-1. Create a new markdown file in the base directory of this repository, e.g. `questions/my-questions.md`.
+1. Create a new markdown file in the `questions` directory, e.g. `questions/my-questions.md`.
 
 2. Add questions and answers to the markdown file in the following format:
 
