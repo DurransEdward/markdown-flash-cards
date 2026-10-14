@@ -105,31 +105,41 @@ async function askNextQuestion() {
         return
     }
 
-    document.getElementById('header').textContent = "Question"
-
     showLevel(questions[currentQuestionIndex].level)
     showQuestionsRemaining()
 
-    const displayQuestion = renderMarkdown(questions[currentQuestionIndex].question, 'question')
-
-    document.getElementById('text').innerHTML = displayQuestion
+    showQuestion()
+    document.getElementById('card-nav').hidden = true
 
     showButtons('reveal-button', 'skip-button')
 
     document.getElementById('answer-input').value = ''
 }
 
-async function revealAnswer() {
-    document.getElementById('header').textContent = "Answer"
+function showQuestion() {
+    document.getElementById('header').textContent = "Question"
+    document.getElementById('text').innerHTML = renderMarkdown(questions[currentQuestionIndex].question, 'question')
+    document.getElementById('show-question-button').disabled = true
+    document.getElementById('show-answer-button').disabled = false
+}
 
-    const displayAnswer = renderMarkdown(questions[currentQuestionIndex].answer, 'answer')
-    document.getElementById('text').innerHTML = displayAnswer
+function showAnswer() {
+    document.getElementById('header').textContent = "Answer"
+    document.getElementById('text').innerHTML = renderMarkdown(questions[currentQuestionIndex].answer, 'answer')
+    document.getElementById('show-question-button').disabled = false
+    document.getElementById('show-answer-button').disabled = true
+}
+
+async function revealAnswer() {
+    showAnswer()
+    document.getElementById('card-nav').hidden = false
 
     showButtons('correct-button', 'almost-correct-button', 'incorrect-button')
 }
 
 function finishedQuiz() {
     document.getElementById('header').textContent = "Finished Quiz!"
+    document.getElementById('card-nav').hidden = true
     document.getElementById('level-badge').hidden = true
     document.getElementById('questions-remaining').hidden = true
     document.getElementById('text').style.visibility = 'hidden'
@@ -170,6 +180,8 @@ async function startQuiz() {
 function setup() {
     document.getElementById('reveal-button').addEventListener('click', revealAnswer)
     document.getElementById('skip-button').addEventListener('click', askNextQuestion)
+    document.getElementById('show-question-button').addEventListener('click', showQuestion)
+    document.getElementById('show-answer-button').addEventListener('click', showAnswer)
     document.getElementById('correct-button').addEventListener('click', () => recordAnswer(true))
     document.getElementById('almost-correct-button').addEventListener('click', askNextQuestion)
     document.getElementById('incorrect-button').addEventListener('click', () => recordAnswer(false))
