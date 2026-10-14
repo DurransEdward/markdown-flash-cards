@@ -41,6 +41,39 @@ body {
   right: 10px;
 }
 
+#card-nav {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 4px;
+}
+
+#card-nav[hidden] {
+  display: none;
+}
+
+#card-nav button {
+  width: 32px;
+  height: 28px;
+  padding: 0;
+  background-color: #ced4da;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#card-nav button:hover:not(:disabled) {
+  background-color: #adb5bd;
+}
+
+#card-nav button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
 #questions-remaining {
   width: fit-content;
   margin: 0 auto 8px;

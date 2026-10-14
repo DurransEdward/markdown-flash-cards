@@ -263,8 +263,8 @@ Note that the first time that $x$ appears in $y\ x\ (\lambda x.\ x) [x := N]$ is
 
 4. No. Substitution is one part of beta reduction. For example, consider the λ-term $x\ y\ x$ and the substitution $[x := N]$. Applying the substitution gives $N\ y\ N$. Now consider the redex $(\lambda x.\ x\ y\ x)\ N$. To perform beta reduction, we first remove the $\lambda x$, then apply the substitution $[x := N]$ to the body $x\ y\ x$, i.e. $(x\ y\ x)[x := N] = N\ y\ N$.
 
-**LEVEL**: 0
-**DATE**: NA
+**LEVEL**: 1
+**DATE**: 2026-10-14
 
 ######################################## NEW QUESTION ########################################
 
@@ -286,52 +286,55 @@ $\to 7$
 
 The intermediate result $\lambda y.\ 3 + y$ is itself a useful function (one that adds 3). Supplying only some of the arguments like this is called **partial application**.
 
-**LEVEL**: 0
-**DATE**: NA
+**LEVEL**: 1
+**DATE**: 2026-10-14
 
 ######################################## NEW QUESTION ########################################
 
 **QUESTION**:
 
-1. What does it mean for two λ-terms to be syntactically identical, denoted $\equiv$?
-2. What does it mean for two λ-terms to be α-equivalent, denoted $=\alpha$?
-3. What does it mean for two λ-terms to be β-equivalent, denoted $=\beta$?
-4. Replace the $???$ with $\equiv$, $=\alpha$, $=\beta$ or $\neq$: in the following with the strongest notion of equivalence.
+1. Informally, what does it mean for two λ-terms to be syntactically identical, denoted $\equiv$?
+2. Informally, what does it mean for two λ-terms to be α-equivalent, denoted $=_{\alpha}$?
+3. Informally, what does it mean for two λ-terms to be β-equivalent, denoted $=\beta$?
+4. Replace the $???$ with $\equiv$, $=_{\alpha}$, $=\beta$ or $\neq$: in the following with the strongest notion of equivalence.
 
    a. $x\ y\ z ??? (x\ y)\ z$?
+
    b. $x\ y\ z ??? x\ (y\ z)$?
+
    c. $\lambda x.\ x ??? \lambda y.\ y$?
+
    d. $(\lambda x.\ x)\ z ??? z$?
 
 **ANSWER**:
 
 1. Two λ-terms are syntactically identical if they are structurally identical (have exactly the same parse tree) and have exactly the same variable names.
-2. Two λ-terms are α-equivalent if they are identical up to renaming of bound variables. For example: $\lambda x.\ x =\alpha \lambda y.\ y$
+2. Two λ-terms are α-equivalent if they are identical up to renaming of bound variables. For example: $\lambda x.\ x =_{\alpha} \lambda y.\ y$
 3. Two λ-terms are β-equivalent if they can be transformed into each other by a series of β-reductions and/or β-expansions. For example $(\lambda x.\ x)\ y =\beta y$
 4.
 
    a. $x\ y\ z \equiv (x\ y)\ z$
    b. $x\ y\ z \neq x\ (y\ z)$
-   c. $\lambda x.\ x =\alpha \lambda y.\ y$
+   c. $\lambda x.\ x =_{\alpha} \lambda y.\ y$
    d. $(\lambda x.\ x)\ z =\beta z$
 
-**LEVEL**: 0
-**DATE**: NA
+**LEVEL**: 1
+**DATE**: 2026-10-14
 
 ######################################## NEW QUESTION ########################################
 
 **QUESTION**: Determine which of the following are valid α-conversions.
 
-1. $(\lambda x.\ x\ (\lambda z.\ x\ y))\ z =\alpha (\lambda y.\ y\ (\lambda z.\ y\ y))\ z$
-2. $\lambda x\ y.\ x\ z\ y =\alpha \lambda v\ u.\ v\ z\ u$
-3. $(\lambda x.\ x\ (\lambda z.\ x\ y))\ z =\alpha (\lambda x.\ x\ (\lambda z.\ x\ y))\ z$
-4. $\lambda x\ y.\ x\ z\ y =\alpha \lambda z\ y.\ z\ z\ y$
-5. $(\lambda x.\ x\ (\lambda z.\ x\ y))\ z =\alpha (\lambda z.\ z\ (\lambda x.\ z\ y))\ z$
-6. $(\lambda x.\ x\ (\lambda z.\ x\ y))\ z =\alpha (\lambda u.\ u\ (\lambda z.\ u\ y))\ v$
-7. $\lambda x\ y.\ x\ z\ y =\alpha \lambda y\ y.\ y\ z\ y$
-8. $(\lambda x.\ x\ (\lambda z.\ x\ y))\ z =\alpha (\lambda u.\ u\ (\lambda z.\ u\ y))\ z$
-9. $\lambda x\ y.\ x\ z\ y =\alpha \lambda v\ y.\ v\ z\ y$
-10. $(\lambda x.\ x\ (\lambda z.\ x\ y))\ z =\alpha (\lambda z.\ z\ (\lambda z.\ z\ y))\ z$
+1. $(\lambda x.\ x\ (\lambda z.\ x\ y))\ z =_{\alpha} (\lambda y.\ y\ (\lambda z.\ y\ y))\ z$
+2. $\lambda x\ y.\ x\ z\ y =_{\alpha} \lambda v\ u.\ v\ z\ u$
+3. $(\lambda x.\ x\ (\lambda z.\ x\ y))\ z =_{\alpha} (\lambda x.\ x\ (\lambda z.\ x\ y))\ z$
+4. $\lambda x\ y.\ x\ z\ y =_{\alpha} \lambda z\ y.\ z\ z\ y$
+5. $(\lambda x.\ x\ (\lambda z.\ x\ y))\ z =_{\alpha} (\lambda z.\ z\ (\lambda x.\ z\ y))\ z$
+6. $(\lambda x.\ x\ (\lambda z.\ x\ y))\ z =_{\alpha} (\lambda u.\ u\ (\lambda z.\ u\ y))\ v$
+7. $\lambda x\ y.\ x\ z\ y =_{\alpha} \lambda y\ y.\ y\ z\ y$
+8. $(\lambda x.\ x\ (\lambda z.\ x\ y))\ z =_{\alpha} (\lambda u.\ u\ (\lambda z.\ u\ y))\ z$
+9. $\lambda x\ y.\ x\ z\ y =_{\alpha} \lambda v\ y.\ v\ z\ y$
+10. $(\lambda x.\ x\ (\lambda z.\ x\ y))\ z =_{\alpha} (\lambda z.\ z\ (\lambda z.\ z\ y))\ z$
 
 **ANSWER**:
 
@@ -360,7 +363,7 @@ The intermediate result $\lambda y.\ 3 + y$ is itself a useful function (one tha
 
 We write:
 
-$\lambda x.\ M =\alpha \lambda y.\ M^{x \to y}$
+$\lambda x.\ M =_{\alpha} \lambda y.\ M^{x \to y}$
 
 And say that $x$ has been renamed to $y$.
 
@@ -373,11 +376,11 @@ And say that $x$ has been renamed to $y$.
 
 **ANSWER**: Consider a λ-abstraction, $M$. Moreover, suppose that $y \notin FV(M)$ and that $y$ is not already a binding variable in $M$. The following count as valid α-conversions:
 
-1. **Renaming**: $\lambda x.\ M =\alpha \lambda y.\ M^{x \to y}$
-2. **Compatibility**: If $M =\alpha N$, then $M\ L =\alpha N\ L$, $L\ M =\alpha L\ N$ and, for arbitrary $z$, $\lambda z.\ M =\alpha \lambda z.\ N$.
-3.a. **Reflexivity**: $M =\alpha M$
-3.b. **Symmetry**: If $M =\alpha N$, then $N =\alpha M$
-3.c. **Transitivity**: If $L =\alpha M$ and $M =\alpha N$, then $L =\alpha N$
+1. **Renaming**: $\lambda x.\ M =_{\alpha} \lambda y.\ M^{x \to y}$
+2. **Compatibility**: If $M =_{\alpha} N$, then $M\ L =_{\alpha} N\ L$, $L\ M =_{\alpha} L\ N$ and, for arbitrary $z$, $\lambda z.\ M =_{\alpha} \lambda z.\ N$.
+3.a. **Reflexivity**: $M =_{\alpha} M$
+3.b. **Symmetry**: If $M =_{\alpha} N$, then $N =_{\alpha} M$
+3.c. **Transitivity**: If $L =_{\alpha} M$ and $M =_{\alpha} N$, then $L =_{\alpha} N$
 
 **LEVEL**: 0
 **DATE**: NA
@@ -440,7 +443,7 @@ Since there are no free variables $x$ in $(\lambda z.\ y\ z)$, the substitution 
 
 $\equiv (\lambda z.\ y\ z)$
 
-$=\alpha (\lambda x.\ y\ x)$
+$=_{\alpha} (\lambda x.\ y\ x)$
 
 3. $(\lambda xy.\ z\ z\ x)[z := y]$
 

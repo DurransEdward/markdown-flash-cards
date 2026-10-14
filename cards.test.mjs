@@ -105,7 +105,7 @@ test('rewriting a card only changes its level and date', () => {
 
 test('the bundled example deck parses with every card due', async () => {
     const { readFile } = await import('node:fs/promises')
-    const cards = parseCards(await readFile(new URL('./example-questions.md', import.meta.url), 'utf8'))
+    const cards = parseCards(await readFile(new URL('./questions/example_questions.md', import.meta.url), 'utf8'))
     assert.equal(cards.length, 6)
     assert.ok(cards.every(card => isDue(card)))
 })
