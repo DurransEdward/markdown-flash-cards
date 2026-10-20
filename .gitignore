@@ -8,3 +8,6 @@ dist
 # Files and directories marked for deletion
 *__delete__*
 *__DELETE__*
+
+# Personal question decks
+questions/lambda_calculus_questions.md
