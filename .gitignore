@@ -10,4 +10,5 @@ dist
 *__DELETE__*
 
 # Personal question decks
-questions/lambda_calculus_questions.md
+questions/*
+!questions/example_questions.md
