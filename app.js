@@ -109,38 +109,28 @@ async function askNextQuestion() {
     showLevel(questions[currentQuestionIndex].level)
     showQuestionsRemaining()
 
-    showQuestion()
-    document.getElementById('card-nav').hidden = true
+    document.getElementById('header').textContent = "Question"
+    document.getElementById('question-text').innerHTML = renderMarkdown(questions[currentQuestionIndex].question, 'question')
+    document.getElementById('answer-section').hidden = true
+    document.getElementById('answer-text').innerHTML = ''
 
     showButtons('reveal-button', 'skip-button')
 
     document.getElementById('answer-input').value = ''
 }
 
-function showQuestion() {
-    document.getElementById('header').textContent = "Question"
-    document.getElementById('text').innerHTML = renderMarkdown(questions[currentQuestionIndex].question, 'question')
-    document.getElementById('show-question-button').disabled = true
-    document.getElementById('show-answer-button').disabled = false
-}
-
-function showAnswer() {
-    document.getElementById('header').textContent = "Answer"
-    document.getElementById('text').innerHTML = renderMarkdown(questions[currentQuestionIndex].answer, 'answer')
-    document.getElementById('show-question-button').disabled = false
-    document.getElementById('show-answer-button').disabled = true
-}
-
 async function revealAnswer() {
-    showAnswer()
-    document.getElementById('card-nav').hidden = false
+    document.getElementById('answer-text').innerHTML = renderMarkdown(questions[currentQuestionIndex].answer, 'answer')
+
+    const answerSection = document.getElementById('answer-section')
+    answerSection.hidden = false
+    answerSection.scrollIntoView({ block: 'nearest' })
 
     showButtons('correct-button', 'almost-correct-button', 'incorrect-button')
 }
 
 function finishedQuiz() {
     document.getElementById('header').textContent = "Finished Quiz!"
-    document.getElementById('card-nav').hidden = true
     document.getElementById('level-badge').hidden = true
     document.getElementById('questions-remaining').hidden = true
     document.getElementById('text').style.visibility = 'hidden'
@@ -181,8 +171,6 @@ async function startQuiz() {
 function setup() {
     document.getElementById('reveal-button').addEventListener('click', revealAnswer)
     document.getElementById('skip-button').addEventListener('click', askNextQuestion)
-    document.getElementById('show-question-button').addEventListener('click', showQuestion)
-    document.getElementById('show-answer-button').addEventListener('click', showAnswer)
     document.getElementById('correct-button').addEventListener('click', () => recordAnswer(true))
     document.getElementById('almost-correct-button').addEventListener('click', askNextQuestion)
     document.getElementById('incorrect-button').addEventListener('click', () => recordAnswer(false))

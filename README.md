@@ -29,7 +29,7 @@ This builds the app, starts the backend server (port 3000) and the front-end ser
 
 4. Type `example_questions.md` into the input field and click the "Load Questions" button. Question files are loaded from the `questions` directory.
 
-5. Click through the flash cards. Only cards that are due today are shown. Before revealing an answer you can click `Reveal Answer` or `Skip Question` (which leaves the card untouched). After revealing the answer, you can flip back and forth between the question and the answer with the `<` and `>` arrows in the top left of the card, and then mark how you did:
+5. Click through the flash cards. Only cards that are due today are shown. Before revealing an answer you can click `Reveal Answer` or `Skip Question` (which leaves the card untouched). After revealing the answer, it appears below the question, and you can then mark how you did:
 
    - `Correct` moves the card up a level and records today's date.
    - `Almost Correct` leaves the card's level and date unchanged (for small slips, like a typo).
