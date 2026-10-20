@@ -4,3 +4,7 @@
 node_modules
 dist
 .parcel-cache
+
+# Files and directories marked for deletion
+*__delete__*
+*__DELETE__*

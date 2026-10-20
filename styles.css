@@ -27,7 +27,6 @@ body {
 }
 
 #level-badge,
-#importance-badge,
 #questions-remaining {
   padding: 4px 12px;
   background-color: #ced4da;
@@ -37,28 +36,10 @@ body {
 }
 
 #level-badge {
-  background: linear-gradient(to right, #a1aab4 var(--level-progress, 0%), #ced4da var(--level-progress, 0%));
-}
-
-#badges {
   position: absolute;
   top: 10px;
   right: 10px;
-  display: flex;
-  gap: 6px;
-}
-
-#importance-badge.importance-high {
-  background-color: #1f4e9c;
-  color: white;
-}
-
-#importance-badge.importance-medium {
-  background-color: #7ea6dc;
-}
-
-#importance-badge.importance-low {
-  background-color: #dbe6f5;
+  background: linear-gradient(to right, #a1aab4 var(--level-progress, 0%), #ced4da var(--level-progress, 0%));
 }
 
 #card-nav {
