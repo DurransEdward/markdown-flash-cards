@@ -52,10 +52,13 @@ body {
   margin: 0;
 }
 
+/* Extends into the card's right padding so the scrollbar sits there instead of over the text. */
 #text {
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
+  margin-right: -10px;
+  padding-right: 10px;
 }
 
 #answer-section {
