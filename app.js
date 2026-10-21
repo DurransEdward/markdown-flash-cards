@@ -93,8 +93,6 @@ async function loadQuestionsFromInput() {
         throw new Error("No questions are due today.")
     }
 
-    document.getElementById('header').style.visibility = 'visible'
-    document.getElementById('text').style.visibility = 'visible'
     document.getElementById('answer-input').style.visibility = 'visible'
 }
 
@@ -113,6 +111,7 @@ async function askNextQuestion() {
     document.getElementById('question-text').innerHTML = renderMarkdown(questions[currentQuestionIndex].question, 'question')
     document.getElementById('answer-section').hidden = true
     document.getElementById('answer-text').innerHTML = ''
+    document.getElementById('text').scrollTop = 0
 
     showButtons('reveal-button', 'skip-button')
 
@@ -133,7 +132,8 @@ function finishedQuiz() {
     document.getElementById('header').textContent = "Finished Quiz!"
     document.getElementById('level-badge').hidden = true
     document.getElementById('questions-remaining').hidden = true
-    document.getElementById('text').style.visibility = 'hidden'
+    document.getElementById('question-text').innerHTML = ''
+    document.getElementById('answer-section').hidden = true
 
     document.getElementById('answer-input').value = ''
     document.getElementById('answer-input').style.visibility = 'hidden'
