@@ -38,6 +38,13 @@ function showLevel(level) {
     badge.hidden = false
 }
 
+function showImportance(importance) {
+    const badge = document.getElementById('importance-badge')
+    badge.textContent = "Importance: " + importance.charAt(0) + importance.slice(1).toLowerCase()
+    badge.className = "importance-" + importance.toLowerCase()
+    badge.hidden = false
+}
+
 function showQuestionsRemaining() {
     const counter = document.getElementById('questions-remaining')
     counter.textContent = "Questions remaining: " + (questions.length - currentQuestionIndex)
@@ -104,6 +111,7 @@ async function askNextQuestion() {
         return
     }
 
+    showImportance(questions[currentQuestionIndex].importance)
     showLevel(questions[currentQuestionIndex].level)
     showQuestionsRemaining()
 
@@ -130,6 +138,7 @@ async function revealAnswer() {
 
 function finishedQuiz() {
     document.getElementById('header').textContent = "Finished Quiz!"
+    document.getElementById('importance-badge').hidden = true
     document.getElementById('level-badge').hidden = true
     document.getElementById('questions-remaining').hidden = true
     document.getElementById('question-text').innerHTML = ''

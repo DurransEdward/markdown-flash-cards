@@ -1,8 +1,9 @@
 export const SEPARATOR = '######################################## NEW QUESTION ########################################'
 export const MAX_LEVEL = 5
+export const IMPORTANCES = ['HIGH', 'LOW']
 
 const DATE_PATTERN = /^(\d{4})-(\d{2})-(\d{2})$/
-const FOOTER_PATTERN = /\*\*LEVEL\*\*:[ \t]*(\S*)[ \t]*\r?\n[ \t]*\*\*DATE\*\*:[ \t]*(\S*)[ \t]*$/
+const FOOTER_PATTERN = /\*\*IMPORTANCE\*\*:[ \t]*(\S*)[ \t]*\r?\n[ \t]*\*\*LEVEL\*\*:[ \t]*(\S*)[ \t]*\r?\n[ \t]*\*\*DATE\*\*:[ \t]*(\S*)[ \t]*$/
 
 const pad = (number, length = 2) => String(number).padStart(length, '0')
 
@@ -85,10 +86,14 @@ export function parseEntry(entry, index = 0) {
     const footerMatch = FOOTER_PATTERN.exec(entry)
 
     if (!questionMatch || !answerMatch || !footerMatch || questionMatch.index > answerMatch.index || answerMatch.index > footerMatch.index) {
-        throw new Error(`Question with index ${index} must contain **QUESTION**, **ANSWER**, **LEVEL** and **DATE** in that order, with **LEVEL** and **DATE** on separate lines at the end.`)
+        throw new Error(`Question with index ${index} must contain **QUESTION**, **ANSWER**, **IMPORTANCE**, **LEVEL** and **DATE** in that order, with **IMPORTANCE**, **LEVEL** and **DATE** on separate lines at the end.`)
     }
 
-    const [, levelString, dateString] = footerMatch
+    const [, importance, levelString, dateString] = footerMatch
+
+    if (!IMPORTANCES.includes(importance)) {
+        throw new Error(`Question with index ${index} has an invalid **IMPORTANCE** "${importance}". It must be HIGH or LOW.`)
+    }
 
     if (!/^[0-5]$/.test(levelString)) {
         throw new Error(`Question with index ${index} has an invalid **LEVEL** "${levelString}". It must be a whole number from 0 to ${MAX_LEVEL}.`)
@@ -103,7 +108,7 @@ export function parseEntry(entry, index = 0) {
     const question = entry.slice(questionMatch.index + questionMatch[0].length, answerMatch.index).trim()
     const answer = entry.slice(answerMatch.index + answerMatch[0].length, footerMatch.index).trim()
 
-    return { question, answer, level, date: dateString, questionIndexInFile: index }
+    return { question, answer, importance, level, date: dateString, questionIndexInFile: index }
 }
 
 export function parseCards(text) {
@@ -112,5 +117,6 @@ export function parseCards(text) {
 
 export function withLevelAndDate(entry, { level, date }) {
     const footerMatch = FOOTER_PATTERN.exec(entry)
-    return `${entry.slice(0, footerMatch.index)}**LEVEL**: ${level}\n**DATE**: ${date}`
+    const importance = footerMatch[1]
+    return `${entry.slice(0, footerMatch.index)}**IMPORTANCE**: ${importance}\n**LEVEL**: ${level}\n**DATE**: ${date}`
 }

@@ -63,6 +63,7 @@ Days are calendar days in your local time, so a card answered correctly yesterda
 
 **ANSWER**: Your first answer.
 
+**IMPORTANCE**: LOW
 **LEVEL**: 0
 **DATE**: NA
 
@@ -72,9 +73,12 @@ Days are calendar days in your local time, so a card answered correctly yesterda
 
 **ANSWER**: Your second answer.
 
+**IMPORTANCE**: LOW
 **LEVEL**: 0
 **DATE**: NA
 ```
+
+Every card needs an `**IMPORTANCE**` of `HIGH` or `LOW` on the line directly above `**LEVEL**`. It is shown next to the card's level while you study. You set it yourself; the app never changes it.
 
 ## Tests
 
